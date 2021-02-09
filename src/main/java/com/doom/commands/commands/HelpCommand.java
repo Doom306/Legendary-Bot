@@ -76,23 +76,27 @@ public class HelpCommand implements ICommand {
 
         if (args.get(0).equals("fun")) {
             EmbedBuilder embedBuilder = new EmbedBuilder();
+            EmbedBuilder embedBuilder1 = new EmbedBuilder();
             embedBuilder.setTitle("Fun Commands");
+            embedBuilder1.setTitle("Fun Commands");
             embedBuilder.setColor(Color.green);
+            embedBuilder1.setColor(Color.green);
             embedBuilder.addField("1.) Spam Command","`/spam`", false);
             embedBuilder.addField("2.) Meme Command","`/meme`", false);
             embedBuilder.addField("3.) Joke Command","`/joke`", false);
             embedBuilder.addField("4.) Font Command","`/font`", false);
             embedBuilder.addField("5.) Code Command","`/code`", false);
             embedBuilder.addField("6.) Avatar Command","`/avatar`", false);
-            embedBuilder.addField("7.) Hack Command","`/hack`", false);
-            embedBuilder.addField("8.) Say Command", "`/say`", false);
-            embedBuilder.addField("9.) Math Command", "`/math`", false);
-            embedBuilder.addField("10.) Emoji Command","`/emoji`", false);
-            embedBuilder.addField("11.) Private Spam Command","`/pspam`", false);
+            embedBuilder1.addField("7.) Hack Command","`/hack`", false);
+            embedBuilder1.addField("8.) Say Command", "`/say`", false);
+            embedBuilder1.addField("9.) Math Command", "`/math`", false);
+            embedBuilder1.addField("10.) Emoji Command","`/emoji`", false);
+            embedBuilder1.addField("11.) Private Spam Command","`/pspam`", false);
 
-            embedBuilder.setFooter("\nType `/help [command name]` to see what they do");
+            embedBuilder1.setFooter("\nType `/help [command name]` to see what they do");
 
             channel.sendMessage(embedBuilder.build()).queue();
+            channel.sendMessage(embedBuilder1.build()).queue();
             return;
         }
         if (args.get(0).equals("games")) {
@@ -135,19 +139,26 @@ public class HelpCommand implements ICommand {
 
         if (args.get(0).equals("mod")) {
             EmbedBuilder embedBuilder = new EmbedBuilder();
+            EmbedBuilder embedBuilder1 = new EmbedBuilder();
             embedBuilder.setTitle("Moderation Commands");
+            embedBuilder1.setTitle("Moderation Commands");
             embedBuilder.setColor(Color.red);
+            embedBuilder1.setColor(Color.red);
             embedBuilder.addField("1.) Kick Command", "`/kick`", false);
             embedBuilder.addField("2.) Ban Command", "`/ban`", false);
             embedBuilder.addField("3.) Mute Command", "`/mute`", false);
             embedBuilder.addField("4.) Deafen Command", "`/deafen`", false);
             embedBuilder.addField("5.) Clear Command", "`/clear`", false);
             embedBuilder.addField("6.) Delete Command", "`/delete`", false);
-            embedBuilder.addField("7.) Set Prefix Command", "`/setprefix`", false);
-            embedBuilder.addField("8.) Add Role Command", "`/role`", false);
-            embedBuilder.setFooter("\nType `/help [command name]` to see what they do");
+            embedBuilder1.addField("7.) Set Prefix Command", "`/setprefix`", false);
+            embedBuilder1.addField("8.) Add Role Command", "`/role`", false);
+            embedBuilder1.addField("9.) Enable Giveaway Win Message", "`/enable`", false);
+            embedBuilder1.addField("10.) Disable Giveaway Win Message", "`/disable`", false);
+            embedBuilder1.addField("11.) Set Giveaway Win Message", "`/setmessage`", false);
+            embedBuilder1.setFooter("\nType `/help [command name]` to see what they do");
 
             channel.sendMessage(embedBuilder.build()).queue();
+            channel.sendMessage(embedBuilder1.build()).queue();
             return;
         }
 

@@ -7,6 +7,25 @@ import java.util.HashMap;
 
 public class Data {
 
-    public static HashMap<Guild, String> message = new HashMap<>();
-    public static HashMap<User, Guild> user = new HashMap<>();
+    private static HashMap<Guild, String> message = new HashMap<>();
+    private static HashMap<User, Guild> user = new HashMap<>();
+
+    public Data() {
+    }
+
+    public static HashMap<Guild, String> getMessage() {
+        return message;
+    }
+
+    public static HashMap<User, Guild> getUser() {
+        return user;
+    }
+
+    public static void setMessage(HashMap<Guild, String> message) {
+        Data.message = message;
+    }
+
+    public static void setUser(HashMap<User, Guild> user) {
+        Data.user = user;
+    }
 }

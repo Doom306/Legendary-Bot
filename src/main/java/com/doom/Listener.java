@@ -25,6 +25,7 @@ public class Listener extends ListenerAdapter {
 
     private static HashMap<Guild, String> message = new HashMap<>();
     private static HashMap<Guild, Boolean> activate = new HashMap<>();
+    private static HashMap<Guild, User> user = new HashMap<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(Listener.class);
     private final CommandManager manager;
     private String text = "Congratulations";

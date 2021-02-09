@@ -78,7 +78,6 @@ public class HelpCommand implements ICommand {
             EmbedBuilder embedBuilder = new EmbedBuilder();
             EmbedBuilder embedBuilder1 = new EmbedBuilder();
             embedBuilder.setTitle("Fun Commands");
-            embedBuilder1.setTitle("Fun Commands");
             embedBuilder.setColor(Color.green);
             embedBuilder1.setColor(Color.green);
             embedBuilder.addField("1.) Spam Command","`/spam`", false);
@@ -141,7 +140,6 @@ public class HelpCommand implements ICommand {
             EmbedBuilder embedBuilder = new EmbedBuilder();
             EmbedBuilder embedBuilder1 = new EmbedBuilder();
             embedBuilder.setTitle("Moderation Commands");
-            embedBuilder1.setTitle("Moderation Commands");
             embedBuilder.setColor(Color.red);
             embedBuilder1.setColor(Color.red);
             embedBuilder.addField("1.) Kick Command", "`/kick`", false);

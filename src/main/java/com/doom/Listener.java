@@ -132,6 +132,8 @@ public class Listener extends ListenerAdapter {
                 List<User> mention = event.getMessage().getMentionedUsers();
 
 
+                int x = 0;
+
                 for (User u : mention) {
                     if (message.containsKey(event.getGuild())) {
                         u.openPrivateChannel().queue(PrivateChannel ->
@@ -141,6 +143,9 @@ public class Listener extends ListenerAdapter {
                                         + "\n** Message from the admins of " + event.getGuild().getName() +":\n" +
                                         message.get(event.getGuild()))
                                         .queue());
+
+                        guild.put(mention.get(x), event.getGuild());
+                        x++;
                     } else {
                         u.openPrivateChannel().queue(PrivateChannel ->
                                 PrivateChannel.sendMessage("***Congratulations***\n**"

@@ -153,6 +153,7 @@ public class HelpCommand implements ICommand {
             embedBuilder1.addField("9.) Enable Giveaway Win Message", "`/enable`", false);
             embedBuilder1.addField("10.) Disable Giveaway Win Message", "`/disable`", false);
             embedBuilder1.addField("11.) Set Giveaway Win Message", "`/setmessage`", false);
+            embedBuilder1.addField("12.) Set Mod to Receive Message", "`/gmod`", false);
             embedBuilder1.setFooter("\nType `/help [command name]` to see what they do");
 
             channel.sendMessage(embedBuilder.build()).queue();

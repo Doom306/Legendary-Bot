@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -25,7 +26,8 @@ public class Listener extends ListenerAdapter {
 
     private static HashMap<Guild, String> message = new HashMap<>();
     private static HashMap<Guild, Boolean> activate = new HashMap<>();
-    private static HashMap<Guild, User> user = new HashMap<>();
+    private static HashMap<User, Guild> guild = new HashMap<>();
+    private static HashMap<Guild, User> mod = new HashMap<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(Listener.class);
     private final CommandManager manager;
     private String text = "Congratulations";
@@ -70,6 +72,34 @@ public class Listener extends ListenerAdapter {
     }
 
     @Override
+    public void onPrivateMessageReceived(@NotNull PrivateMessageReceivedEvent event) {
+        final String contentRaw = event.getMessage().getContentRaw();
+        final User author = event.getAuthor();
+
+        if (!guild.containsKey(author)) {
+            return;
+        }
+
+        final Guild guild = Listener.guild.get(author);
+
+        final User user = guild.getOwner().getUser();
+
+        if (mod.containsValue(guild)) {
+            mod.get(guild).openPrivateChannel().queue(PrivateChannel ->
+                    PrivateChannel.sendMessage("***Reply of " + author.getAsMention() + "***\n**"
+                            + contentRaw
+                            + "** in **" + event.getChannel().getName())
+                            .queue());
+            return;
+        }
+        user.openPrivateChannel().queue(PrivateChannel ->
+                PrivateChannel.sendMessage("***Reply of " + author.getAsMention() + "***\n**"
+                        + contentRaw
+                        + "** in **" + event.getChannel().getName())
+                        .queue());
+    }
+
+    @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
 
         User user = event.getAuthor();
@@ -81,11 +111,19 @@ public class Listener extends ListenerAdapter {
 
         if (event.getMessage().getContentRaw().equals(prefix + "enable") && event.getMember().hasPermission(Permission.BAN_MEMBERS)) {
             activate.put(event.getGuild(), true);
+            event.getChannel().sendMessage("The message that the bot will send if you win has been set to enabled").queue();
+            return;
+        }
+
+        if (event.getMessage().getContentRaw().equals(prefix + "gmod") && event.getMember().hasPermission(Permission.BAN_MEMBERS)) {
+            mod.put(event.getGuild(), event.getMessage().getMentionedUsers().get(0));
+            event.getChannel().sendMessage("The user that the bot will send to " + event.getMessage().getMentionedMembers().get(0) + "if the winner has sent a message").queue();
             return;
         }
 
         if (event.getMessage().getContentRaw().equals(prefix + "disable") && event.getMember().hasPermission(Permission.BAN_MEMBERS)) {
             activate.put(event.getGuild(), false);
+            event.getChannel().sendMessage("The message that the bot will send if you win has been set to disabled").queue();
             return;
         }
 

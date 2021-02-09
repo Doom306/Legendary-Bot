@@ -2,6 +2,7 @@ package com.doom.commands.commands;
 
 import com.doom.commands.CommandContext;
 import com.doom.commands.ICommand;
+import com.doom.database.DatabaseManager;
 
 import java.util.List;
 
@@ -28,7 +29,11 @@ public class SpamCommand implements ICommand {
             ctx.getChannel().sendMessage("Too much spam count imputed").queue();
             return;
         }
-        int supercore = 7;
+
+        final long guildId = ctx.getGuild().getIdLong();
+        String prefix = BadDesign.PREFIXES.computeIfAbsent(guildId, DatabaseManager.INSTANCE::getPrefix);
+        int prefixCount = prefix.length();
+        int supercore = 6 + prefixCount;
 
         int hardcore = 3;
 
